@@ -2,42 +2,15 @@ import java.util.*;
 import java.util.Scanner;
 
 public class overlappingRectangles {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        String[] str = new String[n];
-        for (int i = 0; i < n; i++) {
-            str[i] = sc.nextLine();
-        }
-        List<List<String>> ans = new ArrayList<>();
-        anagrams(str, ans);
+
+    int doOverlap(int L1[], int R1[], int L2[], int R2[]) {
+        // code here
+        if (L1[0] > R2[0] || L2[0] > R1[0]) return 0;
+
+        // If one rectangle is above other
+        if (L1[1] < R2[1] || L2[1] < R1[1]) return 0;
+
+        return 1;
     }
 
-    public static List<List<String>> anagrams(String[] str, List<List<String>> ans) {
-        int n = str.length;
-        HashMap<String, Integer> map = new HashMap<>();
-        int index=0;
-        for (int i = 0; i < n; i++) {
-            char arr[] = new char[str[i].length()];
-            arr = str[i].toCharArray();
-
-            Arrays.sort(arr);
-
-            String word = new String(arr);
-            List<String> list = new ArrayList<>();
-            if(map.containsKey(word)) {
-                int value = map.get(word);
-                list = ans.get(value);
-                list.add(str[i]);
-                ans.set(value, list);
-            }
-            else {
-                list.add(str[i]);
-                map.put(word,index);
-                ans.add(list);
-                index++;
-            }
-        }
-        return ans;
-    }
 }
